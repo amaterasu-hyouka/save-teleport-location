@@ -1,0 +1,6 @@
+name: SaveTeleportLocation
+version: '1.0.0-SNAPSHOT'
+main: jp.amaterasu_hyouka.saveteleportlocation.SaveTeleportLocationPlugin
+api-version: '1.21'
+authors: [amaterasu_hyouka]
+description: Minecraftのワールドの場所を保存してテレポートできるBukkit/Paperサーバー用plugin
