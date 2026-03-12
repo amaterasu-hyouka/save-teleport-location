@@ -1,6 +1,6 @@
-package jp.amaterasu_hyouka.saveteleportlocation.utils;
+package jp.amaterasu_hyouka.saveteleportlocation.util;
 
-import jp.amaterasu_hyouka.saveteleportlocation.SaveTeleportLocationPlugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,9 +8,11 @@ import java.util.logging.Logger;
 public final class Log {
 
     private static final String PREFIX = "> ";
-    private static final Logger LOGGER = SaveTeleportLocationPlugin.getInstance().getLogger();
+    private static Logger LOGGER;
 
-    private Log() {}
+    public static void setLogger(JavaPlugin plugin) {
+        LOGGER = plugin.getLogger();
+    }
 
     public static void info(String msg) {
         LOGGER.log(Level.INFO, PREFIX + msg);

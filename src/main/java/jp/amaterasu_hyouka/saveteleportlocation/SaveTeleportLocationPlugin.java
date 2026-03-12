@@ -1,9 +1,14 @@
 package jp.amaterasu_hyouka.saveteleportlocation;
 
-import jp.amaterasu_hyouka.saveteleportlocation.utils.Log;
+import jp.amaterasu_hyouka.saveteleportlocation.db.mybatis.DatabaseRegistry;
+import jp.amaterasu_hyouka.saveteleportlocation.exception.FileCreationException;
+import jp.amaterasu_hyouka.saveteleportlocation.util.Log;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class SaveTeleportLocationPlugin extends JavaPlugin {
+import static jp.amaterasu_hyouka.saveteleportlocation.util.Log.setLogger;
+
+public final class SaveTeleportLocationPlugin extends JavaPlugin {
 
     private static SaveTeleportLocationPlugin instance;
     public static JavaPlugin getInstance(){
@@ -13,7 +18,18 @@ public class SaveTeleportLocationPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        setLogger(this);
         Log.info("SaveTeleportLocationを起動中...");
+
+        try {
+            new PluginFile(this);
+            DatabaseRegistry.initializeAll();
+        } catch (FileCreationException e) {
+            Log.info("SaveTeleportLocationの起動に失敗しました");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
         Log.info("SaveTeleportLocationを起動しました");
     }
 
