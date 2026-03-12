@@ -2,6 +2,7 @@ package jp.amaterasu_hyouka.saveteleportlocation;
 
 import jp.amaterasu_hyouka.saveteleportlocation.db.mybatis.DatabaseRegistry;
 import jp.amaterasu_hyouka.saveteleportlocation.exception.FileCreationException;
+import jp.amaterasu_hyouka.saveteleportlocation.listener.InitializeListener;
 import jp.amaterasu_hyouka.saveteleportlocation.util.Log;
 
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,6 +30,8 @@ public final class SaveTeleportLocationPlugin extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+
+        new InitializeListener(this);
 
         Log.info("SaveTeleportLocationを起動しました");
     }
