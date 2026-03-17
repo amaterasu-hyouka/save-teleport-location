@@ -94,7 +94,7 @@ public enum DatabaseRegistry {
     private SqlSessionFactory createFactory(){
         PooledDataSource dataSource = new PooledDataSource();
         dataSource.setDriver("org.sqlite.JDBC");
-        dataSource.setUrl("jdbc:sqlite:" + getDatabaseFile(dbName).getAbsolutePath() + "?busy_timeout=10000");
+        dataSource.setUrl("jdbc:sqlite:" + getDatabaseFile(dbName).getAbsolutePath() + "?busy_timeout=10000&foreign_keys=on");
 
         Environment env = new Environment("env", new JdbcTransactionFactory(), dataSource);
         Configuration config = new Configuration(env);

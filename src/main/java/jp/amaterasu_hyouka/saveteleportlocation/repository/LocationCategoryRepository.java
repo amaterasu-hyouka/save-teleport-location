@@ -22,17 +22,17 @@ public class LocationCategoryRepository {
         }
     }
 
-    public List<LocationCategory> getAll(){
-        try (SqlSession session = factory.openSession()){
-            LocationCategoryMapper mapper = session.getMapper(LocationCategoryMapper.class);
-            return mapper.findAll();
-        }
-    }
-
     public LocationCategory getById(int id){
         try (SqlSession session = factory.openSession()){
             LocationCategoryMapper mapper = session.getMapper(LocationCategoryMapper.class);
             return mapper.findById(id);
+        }
+    }
+
+    public List<LocationCategory> getAllInRange(int offset, int limit){
+        try (SqlSession session = factory.openSession()){
+            LocationCategoryMapper mapper = session.getMapper(LocationCategoryMapper.class);
+            return mapper.findAllInRange(offset, limit);
         }
     }
 
@@ -51,6 +51,22 @@ public class LocationCategoryRepository {
         }
     }
 
+    public void updateNameById(int id, String name){
+        try (SqlSession session = factory.openSession()){
+            LocationCategoryMapper mapper = session.getMapper(LocationCategoryMapper.class);
+            mapper.updateNameById(id, name);
+            session.commit();
+        }
+    }
+
+    public void updateMaterialNameById(int id, String materialName){
+        try (SqlSession session = factory.openSession()){
+            LocationCategoryMapper mapper = session.getMapper(LocationCategoryMapper.class);
+            mapper.updateMaterialNameById(id, materialName);
+            session.commit();
+        }
+    }
+
     public void updatePriorityById(int id, int priority){
         try (SqlSession session = factory.openSession()){
             LocationCategoryMapper mapper = session.getMapper(LocationCategoryMapper.class);
@@ -59,7 +75,7 @@ public class LocationCategoryRepository {
         }
     }
 
-    public void deleteDataById(int id){
+    public void deleteById(int id){
         try (SqlSession session = factory.openSession()){
             LocationCategoryMapper mapper = session.getMapper(LocationCategoryMapper.class);
             mapper.deleteById(id);

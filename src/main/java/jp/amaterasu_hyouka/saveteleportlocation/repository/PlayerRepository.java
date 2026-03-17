@@ -5,6 +5,8 @@ import jp.amaterasu_hyouka.saveteleportlocation.model.LoginPlayer;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import java.util.List;
+
 public class PlayerRepository {
     private static final PlayerRepository playerRepository = new PlayerRepository();
     private PlayerRepository(){}
@@ -26,4 +28,12 @@ public class PlayerRepository {
             return mapper.findNameByUuid(uuid);
         }
     }
+
+    public List<LoginPlayer> getAll(){
+        try (SqlSession session = factory.openSession()){
+            PlayerMapper mapper = session.getMapper(PlayerMapper.class);
+            return mapper.findAll();
+        }
+    }
+
 }

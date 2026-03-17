@@ -5,6 +5,7 @@ import jp.amaterasu_hyouka.saveteleportlocation.exception.FileCreationException;
 import jp.amaterasu_hyouka.saveteleportlocation.listener.InitializeListener;
 import jp.amaterasu_hyouka.saveteleportlocation.util.Log;
 
+import jp.amaterasu_hyouka.saveteleportlocation.util.Task;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import static jp.amaterasu_hyouka.saveteleportlocation.util.Log.setLogger;
@@ -31,6 +32,8 @@ public final class SaveTeleportLocationPlugin extends JavaPlugin {
             return;
         }
 
+        Task.init(this);
+        SaveTeleportLocationKey.init(this);
         new InitializeListener(this);
 
         Log.info("SaveTeleportLocationを起動しました");
