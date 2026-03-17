@@ -28,7 +28,7 @@ public class AsyncChatListener implements Listener {
     @EventHandler
     public void handle(AsyncChatEvent e) {
         Player p = e.getPlayer();
-        CustomAsyncChat tempCustomAsyncChat = tempCustomAsyncChatMap.get(p.getUniqueId());
+        CustomAsyncChat tempCustomAsyncChat = tempCustomAsyncChatMap.remove(p.getUniqueId());
         if(tempCustomAsyncChat == null)return;
         e.setCancelled(true);
         tempCustomAsyncChat.handle(e);
