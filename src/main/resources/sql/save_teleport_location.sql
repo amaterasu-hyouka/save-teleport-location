@@ -16,7 +16,9 @@ ON location_categories(priority);
 CREATE TABLE IF NOT EXISTS save_teleport_locations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT DEFAULT '',
-    group_key VARCHAR(36) NOT NULL,
+    player_uuid VARCHAR(36) NOT NULL,
+    player_name VARCHAR(20) NOT NULL,
+    category_id INTEGER,
     material_name TEXT NOT NULL DEFAULT 'STONE',
     world VARCHAR NOT NULL DEFAULT 'world',
     x REAL NOT NULL DEFAULT 0,
@@ -24,8 +26,13 @@ CREATE TABLE IF NOT EXISTS save_teleport_locations (
     z REAL NOT NULL DEFAULT 0,
     yaw REAL NOT NULL DEFAULT 0,
     pitch REAL NOT NULL DEFAULT 0,
-    priority INTEGER NOT NULL
+    player_priority INTEGER NOT NULL,
+    category_priority INTEGER NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES location_categories(id) ON DELETE CASCADE
 );
 
-CREATE INDEX IF NOT EXISTS idx_save_teleport_locations_group_key_priority
-ON save_teleport_locations(group_key, priority);
+CREATE INDEX IF NOT EXISTS idx_save_teleport_locations_player_uuid_player_priority
+ON save_teleport_locations(player_uuid, player_priority);
+
+CREATE INDEX IF NOT EXISTS idx_save_teleport_locations_category_id_category_priority
+ON save_teleport_locations(category_id, category_priority);
